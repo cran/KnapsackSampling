@@ -1,0 +1,9 @@
+e9abd44d746ecc26380b4bc7ba4e2703 *DESCRIPTION
+9c25e1cdc3b5122842a6a70fab49a522 *LICENSE
+fa8991165c0eac77ffd3bc757b7122fe *NAMESPACE
+72e1cedd0bef49d588e2c8bffd692251 *R/knapsackSampling.R
+254f48c4631d6218e07397b53d6daab6 *man/flip01.Rd
+97445bab16118c32dcec2373d141694b *man/grapes-sub-sub-grapes.Rd
+58f3c02faa7dcffc34720739048d5834 *man/initState.Rd
+027cffa11c075a8a9912ee861f300434 *man/sampl.mcmc.Rd
+518b723c78ebda8090f9a47ee43627d4 *man/unlist.constr.Rd
