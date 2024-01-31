@@ -23,4 +23,3 @@ Generate an initial feasible solution by solving a linear programming with binar
 #see documentation for sampl.mcmc
 
 }
-

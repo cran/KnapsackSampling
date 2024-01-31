@@ -1,20 +1,4 @@
 ##############################################################################################################################
-#' Accessing the same named list elements of a list of lists
-#'
-#' @references
-#' credits to @kohske, Accessing same named list elements of the list of lists in R,
-#' http://stackoverflow.com/questions/5935673/accessing-same-named-list-elements-of-the-list-of-lists-in-r/5936077#5936077
-#'
-#' @param x - a list of sublists with same elements in each sublist
-#' @param n - name of element to be accessed from each sublist
-#'
-#' @return list of elements of name n in each sublist
-#'
-'%[[%' <- function(x, n) sapply(x, '[[', as.character(as.list(match.call())$n))
-
-
-
-##############################################################################################################################
 #' Flip a 1 and a 0 simultaneously
 #'
 #' @param x an integer or logical vector
@@ -23,8 +7,19 @@
 #'
 flip01 <- function(x) {
     #store index to prevent flipping the same bit again
-    idx0 <- sample(which(x==0L), 1)
-    idx1 <- sample(which(x==1L), 1)
+    zeroIdxs <- which(x==0L)
+    if (length(zeroIdxs) == 1) {
+        idx0 <- zeroIdxs
+    } else {
+        idx0 <- sample(zeroIdxs, 1)
+    }
+
+    onesIdxs <- which(x==1L)
+    if (length(onesIdxs) == 1) {
+        idx1 <- onesIdxs
+    } else {
+        idx1 <- sample(onesIdxs, 1)
+    }
 
     #flip the bits
     x[idx0] <- 1L; x[idx1] <- 0L
@@ -41,11 +36,14 @@ flip01 <- function(x) {
 #'
 #' @return a list containing matrix, signs and RHS constants
 #'
+#' @noRd
+#'
 unlist.constr <- function(constraints) {
     constr.mat = constr.dir = constr.rhs = NULL
-    list(constr.mat=do.call(rbind, constraints %[[% constr.mat),
-         constr.dir=do.call(c,     constraints %[[% constr.dir),
-         constr.rhs=do.call(c,     constraints %[[% constr.rhs))
+    list(constr.mat=do.call(rbind, lapply(constraints, with, constr.mat)),
+         constr.dir=do.call(c,     lapply(constraints, with, constr.dir)),
+         constr.rhs=do.call(c,     lapply(constraints, with, constr.rhs))
+         )
 } #unlist.constr
 
 
@@ -87,7 +85,7 @@ initState <- function(numVar, objVec=runif(numVar), constraints=NULL) {
 #' @param maxIter - maximum number of iterations to be run to prevent infinite loop
 #' @param constraints - a list of list of constraints with constr.mat, constr.dir, constr.rhs in each sublist.
 #'     Please see example for an example of constraints.
-#' @return a matrix of {0, 1} with each row representing a sample
+#' @return a matrix of \{0, 1\} with each row representing a sample
 #'
 #' @examples
 #'

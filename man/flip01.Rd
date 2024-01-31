@@ -15,4 +15,3 @@ x an integer vector
 \description{
 Flip a 1 and a 0 simultaneously
 }
-

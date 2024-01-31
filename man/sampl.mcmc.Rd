@@ -13,11 +13,11 @@ sampl.mcmc(init, numSampl, maxIter = 2 * numSampl, constraints = NULL)
 
 \item{maxIter}{- maximum number of iterations to be run to prevent infinite loop}
 
-\item{constraints}{- a list of list of constraints with constr.mat, constr.dir, constr.rhs in each sublist
+\item{constraints}{- a list of list of constraints with constr.mat, constr.dir, constr.rhs in each sublist.
 Please see example for an example of constraints.}
 }
 \value{
-a matrix of {0, 1} with each row representing a sample
+a matrix of \{0, 1\} with each row representing a sample
 }
 \description{
 Generate feasible solutions to a knapsack problem using Markov Chain Monte Carlo
@@ -51,4 +51,3 @@ init <- initState(N, constraints=constraints)
 samples <- sampl.mcmc(init, 50, constraints=constraints)
 
 }
-
